@@ -17,3 +17,5 @@ For example care should be taken around handling:
 * document deletions
 * schema modifications/table alteration
 * nested JSON structures and other data type limitations
+
+1. [IBM Cloud Functions](./cloud-functions)
