@@ -17,6 +17,8 @@ This tutorial will demonstrate how to:
 4. Create the Db2 table
 5. Deploy and run application
 
+**N.B. This is an example only intended as a _starting point_ for using Node-RED to move random animal documents from Cloudant and insert them into a Db2 Warehouse on Cloud table. It is not intended as a drop-in replacement for the deprecated Cloudant warehouse integration.**
+
 ## Before you begin 
 
 These are the IBM Cloud services required to run this tutorial:
@@ -119,7 +121,7 @@ We have four nodes:
 2. On the **Manage** tab, click the **Open** button:
 ![Open button image](../spark-on-dsx/open-button.png)
 3. In the Db2 console, click on the **Run SQL** tab.
-4. Copy and paste the `CREATE TABLE` statement below:
+4. Copy the SQL statement below into the editor and press **Run All**.
 ```
 CREATE TABLE ANIMALS (
   ID VARCHAR(255),
@@ -137,8 +139,7 @@ CREATE TABLE ANIMALS (
 
 ## 6. View the data in the Db2 Warehouse table
 1. In the IBM Cloud dashboard, go to your Db2 Warehouse on Cloud service.
-2. On the **Manage** tab, click the **Open** button:
-![Open button image](../spark-on-dsx/open-button.png)
+2. On the **Manage** tab, click the **Open** button.
 3. In the Db2 console, click on the **Explore** tab and select the schema that matches your username.
 4. Select the `ANIMALS` table under the selected schema:
 ![View data image](animals-view-data.png)
