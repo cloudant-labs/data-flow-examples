@@ -20,3 +20,4 @@ For example care should be taken around handling:
 
 1. [IBM Cloud Functions](./cloud-functions)
 2. [Apache Spark on Data Science Experience](./spark-on-dsx)
+2. [Node-RED on IBM Cloud](./node-red)

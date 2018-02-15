@@ -1,0 +1,83 @@
+[
+  {
+    "id": "1e55cba7.59fb6c",
+    "type": "tab",
+    "label": "Flow 1",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "ec3223e.35fe1e",
+    "type": "inject",
+    "z": "1e55cba7.59fb6c",
+    "name": "Inject every 15 seconds",
+    "topic": "",
+    "payload": "Inject every 15 seconds",
+    "payloadType": "str",
+    "repeat": "15",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "1",
+    "x": 150,
+    "y": 40,
+    "wires": [
+      [
+        "cb08dbaf.cb50a8"
+      ]
+    ]
+  },
+  {
+    "id": "cb08dbaf.cb50a8",
+    "type": "cloudant in",
+    "z": "1e55cba7.59fb6c",
+    "name": "Extract all animaldb documents",
+    "cloudant": "af2d1ef.6818ae",
+    "database": "animaldb",
+    "service": "_ext_",
+    "search": "_all_",
+    "design": "",
+    "index": "",
+    "x": 410,
+    "y": 40,
+    "wires": [
+      [
+        "977c9720.223cf8"
+      ]
+    ]
+  },
+  {
+    "id": "977c9720.223cf8",
+    "type": "function",
+    "z": "1e55cba7.59fb6c",
+    "name": "Return random animal document",
+    "func": "// Select a random doc in the animaldb databse\nvar randomDocInt = Math.floor(Math.random() * 13);\nvar doc = msg.cloudant.rows[randomDocInt].doc;\n// Only return animal docs\nif (doc._id.indexOf(\"_design\") === -1) {\n  msg.payload = {\n      ID: doc._id,\n      REV: doc._rev,\n      WIKI_PAGE: doc.wiki_page,\n      CLASS: doc.class,\n      DIET: doc.diet\n  }\n  return msg;\n}",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 700,
+    "y": 40,
+    "wires": [
+      [
+        "cbd3bc33.85b4a"
+      ]
+    ]
+  },
+  {
+    "id": "cbd3bc33.85b4a",
+    "type": "dashDB out",
+    "z": "1e55cba7.59fb6c",
+    "dashDB": "",
+    "service": "Db2 Warehouse on Cloud-kd",
+    "table": "ANIMALS",
+    "name": "Insert into ANIMALS table",
+    "x": 970,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "af2d1ef.6818ae",
+    "type": "cloudant",
+    "z": "",
+    "host": "education.cloudant.com",
+    "name": "education account"
+  }
+]
