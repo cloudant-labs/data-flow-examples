@@ -29,14 +29,12 @@ Both examples below will use this JSON document example:
 ### Extracting array elements
 After connecting to Cloudant and loading documents into a Spark DataFrame (e.g. `cloudantdata`), we'll extract the elements from the `array` column:
 ```python
-from pyspark.sql import functions as F            
-
 # Calculate the number of elements in the 'array' column
-nElements = cloudantdata.select("array").rdd.map(lambda x: len(x[0])).collect()[0]
+nElements = len(cloudantdata.select('array').collect()[0].array)
 
 # Extract and create a new column for each element in 'array' column
 for i in range(nElements):
-    cloudantdata = cloudantdata.withColumn("array." + str(i), F.col('array').getItem(i))
+    cloudantdata = cloudantdata.withColumn('array.' + str(i), cloudantdata.array.getItem(i))
 
 # Drop the 'array' column now that we have extracted all elements
 cloudantdata.drop('array')
@@ -82,8 +80,7 @@ val nElements = elementsOfArray.size()
 
 // Extract and create a new column for each element in 'array' column
 for (i <- 0 until nElements) {
-    cloudantdata = cloudantdata.withColumn("array." + String.valueOf(i),
-    cloudantdata.col("array").getItem(i))
+    cloudantdata = cloudantdata.withColumn("array." + String.valueOf(i), cloudantdata.col("array").getItem(i))
 }
 
 // Drop 'array' column now that we have extracted all elements
