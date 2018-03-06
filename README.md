@@ -18,9 +18,9 @@ For example care should be taken around handling:
 * schema modifications/table alteration
 * nested JSON structures and other data type limitations
 
-1. [IBM Cloud Functions](./cloud-functions)
-2. [Apache Spark on Data Science Experience](./spark-on-dsx)
-2. [Node-RED on IBM Cloud](./node-red)
+1. [IBM Cloud Functions](./cloud-functions/README.md)
+1. [Apache Spark on Data Science Experience](./spark-on-dsx/README.md)
+1. [Node-RED on IBM Cloud](./node-red/README.md)
 
 [Learn more](./warehousing-alternatives-compare-table.md) about the differences between these technologies for extracting Cloudant documents
 and writing the data to a Db2 Warehouse on Cloud table.
