@@ -21,6 +21,7 @@ For example care should be taken around handling:
 1. [IBM Cloud Functions](./cloud-functions/README.md)
 1. [Apache Spark on Data Science Experience](./spark-on-dsx/README.md)
 1. [Node-RED on IBM Cloud](./node-red/README.md)
+1. [IBM Message Hub](./message-hub/README.md)
 
 [Learn more](./warehousing-alternatives-compare-table.md) about the differences between these technologies for extracting Cloudant documents
 and writing the data to a Db2 Warehouse on Cloud table.
