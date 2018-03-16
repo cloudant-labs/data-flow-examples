@@ -119,7 +119,7 @@ We have four nodes:
 
 1. In the IBM Cloud dashboard, go to your Db2 Warehouse on Cloud service.
 2. On the **Manage** tab, click the **Open** button:
-![Open button image](../spark-on-dsx/open-button.png)
+![Open button image](../spark-on-watson-studio/open-button.png)
 3. In the Db2 console, click on the **Run SQL** tab.
 4. Copy the SQL statement below into the editor and press **Run All**.
 ```

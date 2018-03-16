@@ -19,7 +19,7 @@ For example care should be taken around handling:
 * nested JSON structures and other data type limitations
 
 1. [IBM Cloud Functions](./cloud-functions/README.md)
-1. [Apache Spark on Data Science Experience](./spark-on-dsx/README.md)
+1. [Apache Spark on Watson Studio](spark-on-watson-studio/README.md)
 1. [Node-RED on IBM Cloud](./node-red/README.md)
 1. [IBM Message Hub](./message-hub/README.md)
 

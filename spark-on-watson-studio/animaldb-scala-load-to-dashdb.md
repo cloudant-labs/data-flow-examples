@@ -1,8 +1,8 @@
-# Simple load from Cloudant to Db2 in Spark using DSX (Scala language)
+# Simple load from Cloudant to Db2 in Spark using Watson Studio (Scala language)
 This tutorial is an introduction on loading Cloudant data into Apache Spark and saving the data into Db2.
 In this tutorial you will:
 
-1. Create a Scala notebook to load the Cloudant data in Data Science experience.
+1. Create a Scala notebook to load the Cloudant data in Watson Studio.
 2. Save the Apache Spark DataFrame into Db2 Warehouse on Cloud.
 3. View the data in the Db2 Warehouse on Cloud table.
 
@@ -21,7 +21,7 @@ These will be required for saving the Spark data into a Db2 Warehouse table.
 
 ### 1. Create a Scala notebook to load the Cloudant data
 
-1. Log in to Data Science experience at http://datascience.ibm.com.
+1. Log in to Watson Studio at https://dataplatform.ibm.com.
 2. Create a new notebook, specifying a name, description, Spark service to use, Scala 2.11, and Spark 2.1.
 3. Paste the following statement into the first cell, and then click **Run**. 
    This command contains SQLContext which is the entry point into all functionality in Spark SQL and is necessary to 
