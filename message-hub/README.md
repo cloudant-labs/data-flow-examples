@@ -131,7 +131,7 @@ Configuration for publishing messages from Cloudant to Message Hub using Apache 
 
 Configuration for consuming messages from Message Hub with Apache Kafka Connect and writing them to a Db2 Warehouse on Cloud using `kafka-connect-jdbc` as a sink connector.
 
-1. Download the [`kafka-connect-jdbc` jar from Confluent's Maven repository](packages.confluent.io/maven/io/confluent/kafka-connect-jdbc/4.0.0/kafka-connect-jdbc-4.0.0.jar)
+1. Download the [`kafka-connect-jdbc` jar from Confluent's Maven repository](http://packages.confluent.io/maven/io/confluent/kafka-connect-jdbc/4.0.0/kafka-connect-jdbc-4.0.0.jar)
 1. Create a `connect-jdbc-sink.properties` file
 1. Add these properties, substituting your details where appropriate.
 
