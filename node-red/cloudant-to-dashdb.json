@@ -77,7 +77,7 @@
     "id": "af2d1ef.6818ae",
     "type": "cloudant",
     "z": "",
-    "host": "education.cloudant.com",
-    "name": "education account"
+    "host": "examples.cloudant.com",
+    "name": "examples account"
   }
 ]

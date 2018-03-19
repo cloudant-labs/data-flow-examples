@@ -30,10 +30,10 @@ These will be required for saving the Spark data into a Db2 Warehouse table.
    ```
    
 4. Paste the following statement into the second cell, and then click Run. This command reads the `animaldb` database from the Cloudant 
-`education` account and assigns it to the `cloudantdata` variable.
+`examples` account and assigns it to the `cloudantdata` variable.
    ```
    cloudantdata = spark.read.format("org.apache.bahir.cloudant")\
-   .option("cloudant.host", "education.cloudant.com")\
+   .option("cloudant.host", "examples.cloudant.com")\
    .load("animaldb")
    ```
 
