@@ -25,7 +25,7 @@ These are the IBM Cloud services required to run this tutorial:
 1. [Node-RED Starter app](https://console.bluemix.net/catalog/starters/node-red-starter)
 2. [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/dashdb)
 3. [Cloudant NoSQL DB](https://console.bluemix.net/catalog/services/cloudant-nosql-db)  
-Note: Since the tutorial uses the `animaldb` database in Cloudant's `education` account, you won't be required to interact with the Cloudant instance provided with the Node-RED Starter application.
+Note: Since the tutorial uses the `animaldb` database in Cloudant's `examples` account, you won't be required to interact with the Cloudant instance provided with the Node-RED Starter application.
 
 ## 1. Create your Db2 service and Node-RED applicaton
 
@@ -86,7 +86,7 @@ We have four nodes:
 
 2. `Cloudant in` (Extract all animaldb documents)
 
-    The `Cloudant in` block with retrieve a random animal doc from the `animaldb` database in the `education` account.
+    The `Cloudant in` block with retrieve a random animal doc from the `animaldb` database in the `examples` account.
     
 4.  `Function` (Return random animal document)
 
