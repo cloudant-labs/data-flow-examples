@@ -98,7 +98,7 @@ extracted Apache Kafka installation.
 
 Configuration for publishing messages from Cloudant to Message Hub using Apache Kafka and `kafka-connect-cloudant` as a source connector.
 
-1. Download the [`kafka-connect-cloudant` jar from Maven central](http://repo1.maven.org/maven2/com/cloudant/kafka-connect-cloudant/0.100.0-kafka-1.0.0/kafka-connect-cloudant-0.100.0-kafka-1.0.0.jar) -this tutorial used `kafka-connect-cloudant-0.100.0-kafka-1.0.0.jar`.
+1. Download the [`kafka-connect-cloudant` jar from Maven central](http://repo1.maven.org/maven2/com/cloudant/kafka-connect-cloudant/0.100.1-kafka-1.0.0/kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar) -this tutorial used `kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar`.
 1. Create a `connect-cloudant-source.properties` file.
 1. Add these properties, substituting your details where appropriate.
 
@@ -164,7 +164,7 @@ and the Db2 JDBC 4 jar (installed as part of the Db2 driver package) to the Java
 `sqllib/java` install path) e.g.
 
     ```sh
-    export CLASSPATH=/path/to/downloaded/kafka-connect-cloudant-0.100.0-kafka-1.0.0.jar:/path/to/downloaded/kafka-connect-jdbc-4.0.0.jar:/sqllib/java/db2jcc4.jar
+    export CLASSPATH=/path/to/downloaded/kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar:/path/to/downloaded/kafka-connect-jdbc-4.0.0.jar:/sqllib/java/db2jcc4.jar
     ```
     Note this example uses the Linux default installation location for the db2jcc4.jar it may be diff
 1. Run the Kafka Connect standalone worker with the property files created and configured earlier.
