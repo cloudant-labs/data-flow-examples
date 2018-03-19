@@ -108,12 +108,11 @@ Configuration for publishing messages from Cloudant to Message Hub using Apache 
     connector.class=com.ibm.cloudant.kafka.connect.CloudantSourceConnector
     # Substitute with the name of your topic
     topics=exampleTopic
-    # Substitute with your DB
-    cloudant.db.url=https://examples.cloudant.com/animaldb
-    # Not needed for the public examples account, but if using your own data then
-    # substitute with your Cloudant credentials
-    #cloudant.db.username=
-    #cloudant.db.password=
+    # Substitute with your account and database
+    cloudant.db.url=https://account.cloudant.com/animaldb
+    # Substitute with your Cloudant credentials
+    cloudant.db.username=
+    cloudant.db.password=
     cloudant.db.since=0
     batch.size=50
     # Configure kafka-connect-cloudant to generate structs from the JSON documents
