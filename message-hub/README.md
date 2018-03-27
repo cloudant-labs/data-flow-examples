@@ -41,15 +41,8 @@ curl -v -H 'Content-Type: application/json' -H 'Accept: */*' -H 'X-Auth-Token: $
 When using your own data be sure to choose an appropriate table schema and
 consider the specifics of JSON to Struct conversion as documented by
  `kafka-connect-cloudant` (e.g. numbers represented as FLOAT64/double).
-1. From the Db2 Warehouse dashboard select the `JDBC` in the connect dropdown
-and follow the link to the connection information.
-![JDBC connect dropdown](db2_conn.jpg)
-1. Follow the instructions to install the Db2 JDBC driver for your platform if needed.
-![Install JDBC driver](db2_jdbc_driver.jpg)
-1. Copy ther JDBC connection string as you will need it to configure the
-`kafka-connect-jdbc` sink connector.
-![JDBC connection string](db2_jdbc.jpg)  
-
+1. [Download the Db2 JDBC driver and save the JDBC connection details](../db2/connection_details.md).<br/>
+**Note:** Keep the connection details for configuring the `kafka-connect-jdbc` sink connector.
 # Setting up Apache Kafka Connect
 
 1. Download [Apache Kafka](https://kafka.apache.org/downloads). This tutorial uses [version 1.0.0 for Scala 2.11.0 (`kafka_2.11-1.0.0.tgz`)](https://www.apache.org/dyn/closer.cgi?path=/kafka/1.0.0/kafka_2.11-1.0.0.tgz).
