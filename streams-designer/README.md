@@ -45,7 +45,21 @@ These are the IBM Bluemix services required to run this tutorial:
 Cloud Object Storage instance was not created beforehand, you will have the option of adding one.
 ![Create New Project in Watson Studio](create-new-project-watson-studio.png) 
 
-## Create a Streams flow
+## Option 1: Import the Streams flow file
+1. Create a new Streams flow under the `Add to project` drop-down list.
+![Select Streams flow](streams-flow-watson-studio.png)
+1. On the **New Streams Flow** screen, Select **From file**.  Drag and drop [Cloudant_to_Db2_streams_flow.stp](Cloudant_to_Db2_streams_flow.stp)
+under the **File** section.
+The Streaming Analytics service drop-down box should already be filled in.  Press **Create**.
+![Import Streams flow](import-streams-flow-watson-studio.png)
+1. Edit the streams flow by clicking the pencil icon.
+![Open Streams Designer Editor](open-streams-designer-editor.png)
+1. Select the Code operator to open the code editor in the right pane. Replace the lines with `username`, `password`, and
+`account` with your Cloudant credentials.
+![](code-operator-streams-designer.png)
+1. [Setup the Db2 operator.](#setup-the-db2-operator)
+
+## Option 2: Create a new Streams flow
 1. Create a new Streams flow under the `Add to project` drop-down list.
 ![Select Streams flow](streams-flow-watson-studio.png)
 1. On the **New Streams Flow** screen, add a name and optional description for the project. 
@@ -53,7 +67,6 @@ The Streaming Analytics service drop-down box should already be filled in.
 Select the **Manually** box, then press **Create**.
 ![Create Streams flow](create-streams-flow-watson-studio.png)
 
-## Create operators in the Streams Designer editor
 The first node we'll create is a Python node for loading documents from Cloudant.
 1. Drag and drop the `Code` operator under **Sources** on to the canvas.
 1. Select the `Code` operator and a right pane will open for editing the code.
@@ -128,6 +141,8 @@ The first node we'll create is a Python node for loading documents from Cloudant
 
 1. Select the floppy disk icon in the Stream Designer toolbar to save the flow.
 1. Drag and drop the Db2 Warehouse on Cloud operator under **Targets** on to the canvas.
+
+## Setup the Db2 operator
 1. Select the Db2 Warehouse on Cloud operator and a right pane will open for adding connection details.
 ![Db2 operator in Streams Designer](db2-operator-streams-designer.png)
 1. Click `Add Connection` and select the Db2 Warehouse on Cloud instance that was previously created.
@@ -145,6 +160,8 @@ port of the Db2 operator.
 ![Select Map Schema in Db2 operator](map-schema-db2-operator.png)
 1. Assign the attributes previously created in the `Code` operator to it's equivalent Db2 target column, and then press **Save**.
 ![Map attributes to Db2 target columns](assign-attributes-db2-operator.png)
+
+## Run the Streams flow
 1. Press the play icon in the Stream Designer toolbar to save and run the streams flow.
 ![Play icon in Streams Designer](play-icon-stream-designer.png)
 1. The Status indicator in the Metrics page will change from _stopped_ to _starting_, and then to _running_.
