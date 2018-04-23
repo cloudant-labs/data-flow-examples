@@ -74,10 +74,8 @@ The first node we'll create is a Python node for loading documents from Cloudant
 1. Select `Python 3.5` as the coding language and replace what's existing with the code below.<br/>
    **Note:** Add your Cloudant credentials as parameters in the Cloudant initializer `client = Cloudant(...)`.
     ```python
-    import sys
     from cloudant import Cloudant
-    from cloudant.feed import Feed
-    
+        
     # init() function will be called once on pipeline initialization
     # @state a Python dictionary object for keeping state. The state object is passed to the produce function
     
@@ -96,6 +94,7 @@ The first node we'll create is a Python node for loading documents from Cloudant
     # You must declare all output attributes in the Edit Schema window.
     def produce(submit, state):
         # Replace with your Cloudant credentials
+        # Note: In general, 'account' is the username.
         client = Cloudant(
             'username',
             'password',
@@ -103,25 +102,11 @@ The first node we'll create is a Python node for loading documents from Cloudant
             connect=True
         )
         db = client['animaldb']
-        feed = Feed(db, feed='continuous', include_docs=True)
+        feed = db.changes(feed='continuous', include_docs=True)
         for change in feed:
-            doc = change['doc']
-            if 'payload' in doc:
-                output_doc = {}
-                output_doc['_id'] = doc['_id']
-                output_doc['_rev'] = doc['_rev']
-                if 'wiki_page' in doc['payload']:
-                    output_doc['wiki_page'] = doc['payload']['wiki_page']
-                if 'min_weight' in doc['payload']:
-                    output_doc['min_weight'] = doc['payload']['min_weight']
-                if 'max_weight' in doc['payload']:
-                    output_doc['max_weight'] = doc['payload']['max_weight']
-                if 'class' in doc['payload']:
-                    output_doc['class'] = doc['payload']['class']
-                if 'diet' in doc['payload']:
-                    output_doc['diet'] = doc['payload']['diet']
-                # Submit a tuple in each iteration:
-                submit(output_doc)
+           doc = change['doc']
+           # Submit the Cloudant doc in each iteration:
+           submit(doc)
     ```
 1. Select the `Edit Output Schema` below the code editor.
 1. Add the following attribute names and their types using the **Add Attribute** button.
@@ -131,9 +116,13 @@ The first node we'll create is a Python node for loading documents from Cloudant
     --- | --- 
     \_id | Text
     \_rev | Text
+    \_deleted | Boolean
     wiki_page | Text
     min_weight | Number
     max_weight | Number
+    min_length | Number
+    max_length | Number
+    latin_name | Text
     class | Text
     diet | Text
 
