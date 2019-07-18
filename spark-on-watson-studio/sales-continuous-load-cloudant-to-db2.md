@@ -5,15 +5,17 @@ This notebook uses Spark Streaming to load Cloudant documents into Apache Spark,
 
 ## Before you begin 
 
-These are the services required in your IBM Bluemix account:
+These are the services required in your IBM Watson Studio account:
 
-1. [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark)
+1. [Apache Spark](https://spark.apache.org)
 2. [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/dashdb)
 
 Watch the [Getting Started on IBM Cloud](https://developer.ibm.com/clouddataservices/docs/spark/get-started/get-started-in-bluemix/) video to add the IBM Analytics for Apache Spark service to your IBM Cloud account.
 
 Note: For `Db2 Warehouse on Cloud` service, you'll need to locate and copy the service credentials.
 These will be required for saving the Spark data into a Db2 Warehouse table.
+
+Note: [`sql-cloudant` library is required](../sql-cloudant/install-in-python-notebook.md). 
 
 The cell below will set up the custom Db2 dialect (with proper string type mapping):
 

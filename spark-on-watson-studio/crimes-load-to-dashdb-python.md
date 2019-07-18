@@ -11,18 +11,19 @@ In this tutorial you will:
 
 ## Before you begin 
 
-These are the services required in your IBM Bluemix account:
+These are the services required in your IBM Watson Studio account:
 
-1. [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark)
+1. [Apache Spark](https://spark.apache.org)
 2. [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/dashdb)
 
-Watch the [Getting Started on IBM Cloud](https://developer.ibm.com/clouddataservices/docs/spark/get-started/get-started-in-bluemix/) video to add the IBM Analytics for Apache Spark service to your IBM Cloud account.
+Watch the [Getting Started on IBM Cloud](https://developer.ibm.com/clouddataservices/docs/spark/get-started/get-started-in-bluemix/) video to create an account.
 
 Note: For `Db2 Warehouse on Cloud` service, you'll need to locate and copy the service credentials.
 These will be required for saving the Spark data into a Db2 Warehouse table.
 
-### 1. Load the Cloudant data from the `crimes` database
+### [1. Install Apache Bahir's sql-cloudant](../sql-cloudant/install-in-python-notebook.md)
 
+### 2. Load the Cloudant data from the `crimes` database
 
 ```python
 # Import and initialize SparkSession
@@ -75,7 +76,7 @@ cloudantdata.printSchema()
     
 
 
-### 2. Save the `properties` column in the Spark DataFrame into Db2 Warehouse on Cloud
+### 3. Save the `properties` column in the Spark DataFrame into Db2 Warehouse on Cloud
 
 In preparation of saving the `properties` struct, we need to extract each field since Db2 does not support this data type.
 
@@ -163,7 +164,7 @@ db2_jdbc_url = 'jdbc:db2://***:50000/BLUDB'
 propertiesDF.write.jdbc(db2_jdbc_url, 'crimes_filtered', properties=conn_properties)
 ```
 
-### 3. View the data in the Db2 Warehouse table
+### 4. View the data in the Db2 Warehouse table
 1. In the Bluemix dashboard, go to your Db2 Warehouse on Cloud service.
 2. On the **Manage** tab, click the **Open** button:
 ![Open button image](crimes-open-button.png)
@@ -174,4 +175,4 @@ propertiesDF.write.jdbc(db2_jdbc_url, 'crimes_filtered', properties=conn_propert
 ![Crimes table image](crimes-table.png)
 
 To learn more about Cloudant and work with your own Cloudant database, check out the 
-[Cloudant NoSQL DB IBM Bluemix service](https://console.bluemix.net/catalog/services/cloudant-nosql-db).
+[Cloudant NoSQL DB IBM Watson Studio service](https://console.bluemix.net/catalog/services/cloudant-nosql-db).
