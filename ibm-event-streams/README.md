@@ -92,7 +92,7 @@ extracted Apache Kafka installation.
 
 Configuration for publishing messages from Cloudant to Event Streams using Apache Kafka and `kafka-connect-cloudant` as a source connector.
 
-1. Download the [`kafka-connect-cloudant` version 1.0.0 jar from Maven central](http://repo1.maven.org/maven2/com/cloudant/kafka-connect-cloudant/0.100.1-kafka-1.0.0/kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar).
+1. Download [`kafka-connect-cloudant` version 0.100.1 jar for use with Kafka 1.0.0 APIs from Maven central](http://repo1.maven.org/maven2/com/cloudant/kafka-connect-cloudant/0.100.1-kafka-1.0.0/kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar).
 1. Create a `connect-cloudant-source.properties` file.
 1. Add these properties, substituting your details where appropriate.
 
@@ -180,5 +180,5 @@ and the Db2 JDBC 4 jar (installed as part of the Db2 driver package) to the Java
 * [`kafka-connect-cloudant`](https://github.com/cloudant-labs/kafka-connect-cloudant)
 * [`kafka-connect-jdbc`](https://github.com/confluentinc/kafka-connect-jdbc)
 * [Confluent JDBC connector documentation](https://docs.confluent.io/current/connect/connect-jdbc/docs/index.html)
-* [Creating a Kafka topic with the Event Streams admin REST API](https://github.com/ibm-messaging/message-hub-docs/tree/master/admin-rest-api#creating-a-kafka-topic)
+* [Creating a Kafka topic with the Event Streams admin REST API](https://github.com/ibm-messaging/event-streams-docs/tree/master/admin-rest-api#creating-a-kafka-topic)
 * [Connecting to Db2 Warehouse with JDBC](https://www.ibm.com/support/knowledgecenter/SSCJDQ/com.ibm.swg.im.dashdb.doc/connecting/connect_connecting_jdbc_applications.html)
