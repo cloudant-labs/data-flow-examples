@@ -1,4 +1,4 @@
-# Simple load from Cloudant to Db2 in `Streams Designer (Beta)`
+# Simple load from Cloudant to Db2 in `Streams Designer`
 This tutorial is an introduction on loading Cloudant documents and saving that data into Db2 within Streams Designer.
 In this tutorial you will:
 
@@ -11,12 +11,12 @@ In this tutorial you will:
 
 **N.B. This is an example only intended as a _starting point_ for using IBM Streams Designer to extract data from Cloudant and insert into Db2 Warehouse on Cloud. It is _not_ intended as a drop-in replacement for the deprecated Cloudant warehouse integration. In particular this example does not create or alter Db2 tables or handle document deletion.**
 
-## Before you begin 
+## Before you begin
 
-These are the IBM Bluemix services required to run this tutorial:
+These are the IBM Watson Studio services required to run this tutorial:
 1. [Cloudant](https://console.bluemix.net/catalog/services/cloudant-nosql-db)
 1. [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/dashdb)
-1. [Watson Studio](https://datascience.ibm.com)
+1. [IBM Watson Studio](https://dataplatform.cloud.ibm.com)
 
 # Setting up IBM Cloud services
 

@@ -1,17 +1,19 @@
-# Using IBM Message Hub and Apache Kafka to copy documents from Cloudant to Db2 Warehouse on Cloud
+# Using IBM Event Streams and Apache Kafka to copy documents from Cloudant to Db2 Warehouse on Cloud
 
 This tutorial will use Apache Kafka Connect to publish messages from a Cloudant
-database to an IBM Cloud Message Hub topic. The messages will then be consumed by
+database to a topic. The messages will then be consumed by
 Apache Kafka Connect's JDBC connector to write to a Db2 Warehouse on Cloud table.
 
+[Learn more about Event Streams key concepts](https://ibm.github.io/event-streams/about/key-concepts/)
+
 This tutorial will demonstrate how to:
-1. [Set up Cloudant, Message Hub and Db2 Warehouse on Cloud.](#setting-up-ibm-cloud-services)
-1. [Set up Apache Kafka Connect to connect to Message Hub.](#setting-up-apache-kafka-connect)
+1. [Set up Cloudant, Event Streams and Db2 Warehouse on Cloud.](#setting-up-ibm-cloud-services)
+1. [Set up Apache Kafka Connect to connect to Event Streams.](#setting-up-apache-kafka-connect)
 1. [Configure Apache Kafka Connect with `kafka-connect-cloudant` to produce messages for Cloudant documents.](#configure-kafka-connect-cloudant-as-a-source-connector)
 1. [Configure Apache Kafka Connect with `kafka-connect-jdbc` to consume messages from a topic and write to Db2 Warehouse on Cloud.](#configure-kafka-connect-jdbc-as-a-sink-connector)
 1. [Run Apache Kafka Connect in a standalone worker configuration.](#running-apache-kafka-connect)
 
-**N.B. This is an example only intended as a _starting point_ for using IBM Message Hub and Apache Kafka Connect to extract data from Cloudant and insert into Db2 Warehouse on Cloud. It is _not_ intended as a drop-in replacement for the deprecated Cloudant warehouse integration. In particular this example does not create or alter Db2 tables or handle document deletion.**
+**N.B. This is an example only intended as a _starting point_ for using IBM Event Streams and Apache Kafka Connect to extract data from Cloudant and insert into Db2 Warehouse on Cloud. It is _not_ intended as a drop-in replacement for the deprecated Cloudant warehouse integration. In particular this example does not create or alter Db2 tables or handle document deletion.**
 
 # Setting up IBM Cloud services
 
@@ -20,15 +22,16 @@ This tutorial will demonstrate how to:
 1. [Create an IBM Cloudant](../cloudant/create.md) instance.
 1. [Replicate the tutorial data](../cloudant/replicate.md).
 
-## Message Hub
+## IBM Event Streams
 
-1. Create an [IBM Message Hub](https://console.bluemix.net/catalog/services/message-hub) service instance.
-![Message Hub in catalog](mh_catalog.png)
-![Create Message Hub instance](mh_create.jpg)
-1. Create Service Credentials for IBM Message Hub.
-![Create Message Hub service credentials](mh_creds.jpg)
-1. Use the Message Hub `Manage` interface to create a topic with a single partition, e.g. `exampleTopic`.
-![Create Message Hub topic](mh_topic.jpg)
+1. Create an [IBM Event Streams](https://cloud.ibm.com/catalog/services/event-streams) service instance.
+![Create Event Streams instance](event_streams_create.png)
+1. Create Service Credentials for IBM Event Streams.
+![Create Event Streams service credentials](event_streams_creds.png)
+1. Use the Event Streams `Manage` interface to create a 1) topic name, 2) single partition and, 3) one day retention.
+![Create Event Streams topic name](event_streams_create_topic_name.png)
+![Create Event Streams topic partitions](event_streams_create_topic_partitions.png)
+![Create Event Streams topic retention](event_streams_create_topic_retention.png)
 Or alternatively use the `api_key` and the `kafka_admin_url` from your service credentials to create the topic from the command line e.g.<br/>
 ```sh
 curl -v -H 'Content-Type: application/json' -H 'Accept: */*' -H 'X-Auth-Token: ${api_key}' -d '{ "name": "exampleTopic", "partitions": 1 }' <kafka_admin_url>/admin/topics
@@ -49,15 +52,13 @@ consider the specifics of JSON to Struct conversion as documented by
 1. Extract the Apacke Kafka installation.
 1. Open the `connect-standalone.properties` file in the `config` directory of the
 extracted Apache Kafka installation.
-1. Add or edit these properties, substituting values from your IBM Message Hub service credentials where appropriate.
+1. Add or edit these properties, substituting values from your IBM Event Streams service credentials where appropriate.
 
     ```properties
     # Substitute your server endpoints as shown in your service credentials
-    bootstrap.servers=kafka04-prod02.messagehub.services.eu-gb.bluemix.net:9093,\
-    kafka03-prod02.messagehub.services.eu-gb.bluemix.net:9093,\
-    kafka05-prod02.messagehub.services.eu-gb.bluemix.net:9093,\
-    kafka02-prod02.messagehub.services.eu-gb.bluemix.net:9093,\
-    kafka01-prod02.messagehub.services.eu-gb.bluemix.net:9093
+    bootstrap.servers=kafka-1.mh-lndsvjgsxyspcxffwfhydnwfrwggs.eu-gb.containers.appdomain.cloud:9093,\
+    kafka-2.mh-lndsvjgsxyspcxffwfhydnwfrwggs.eu-gb.containers.appdomain.cloud:9093,\
+    kafka-3.mh-lndsvjgsxyspcxffwfhydnwfrwggs.eu-gb.containers.appdomain.cloud:9093
 
     # Message producer connection configuration, substitute your username and password
     producer.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="username" password="password";
@@ -89,9 +90,9 @@ extracted Apache Kafka installation.
 
 # Configure `kafka-connect-cloudant` as a source connector
 
-Configuration for publishing messages from Cloudant to Message Hub using Apache Kafka and `kafka-connect-cloudant` as a source connector.
+Configuration for publishing messages from Cloudant to Event Streams using Apache Kafka and `kafka-connect-cloudant` as a source connector.
 
-1. Download the [`kafka-connect-cloudant` jar from Maven central](http://repo1.maven.org/maven2/com/cloudant/kafka-connect-cloudant/0.100.1-kafka-1.0.0/kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar) -this tutorial used `kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar`.
+1. Download [`kafka-connect-cloudant` version 0.100.1 jar for use with Kafka 1.0.0 APIs from Maven central](http://repo1.maven.org/maven2/com/cloudant/kafka-connect-cloudant/0.100.1-kafka-1.0.0/kafka-connect-cloudant-0.100.1-kafka-1.0.0.jar).
 1. Create a `connect-cloudant-source.properties` file.
 1. Add these properties, substituting your details where appropriate.
 
@@ -121,7 +122,7 @@ Configuration for publishing messages from Cloudant to Message Hub using Apache 
 
 # Configure `kafka-connect-jdbc` as a sink connector
 
-Configuration for consuming messages from Message Hub with Apache Kafka Connect and writing them to a Db2 Warehouse on Cloud using `kafka-connect-jdbc` as a sink connector.
+Configuration for consuming messages from Event Streams with Apache Kafka Connect and writing them to a Db2 Warehouse on Cloud using `kafka-connect-jdbc` as a sink connector.
 
 1. Download the [`kafka-connect-jdbc` jar from Confluent's Maven repository](http://packages.confluent.io/maven/io/confluent/kafka-connect-jdbc/4.0.0/kafka-connect-jdbc-4.0.0.jar)
 1. Create a `connect-jdbc-sink.properties` file
@@ -165,19 +166,19 @@ and the Db2 JDBC 4 jar (installed as part of the Db2 driver package) to the Java
     /path/to/your/kafka_2.11-1.0.0/bin/connect-standalone.sh /path/to/your/kafka_2.11-1.0.0/config/connect-standalone.properties /path/to/your/connect-cloudant-source.properties /path/to/your/connect-jdbc-sink.properties
     ```
 1. The Kafka Connect worker will run
-    1. Reading documents from the Cloudant database and publishing them to the Message Hub topic
+    1. Reading documents from the Cloudant database and publishing them to the Event Streams topic
         * On stdout you will see a message like `INFO Return 20 records with last offset "..."`
         as `kafka-connect-cloudant` publishes messages to the topic.
-    1. Consuming messages from the Message Hub topic and inserting them into the Db2 Warehouse on Cloud table.
+    1. Consuming messages from the Event Streams topic and inserting them into the Db2 Warehouse on Cloud table.
 1. The worker will continue to run until a terminal error or it is stopped.
 1. [View the extracted data imported into the Db2 table](../db2/view_data.md).
 
 # References
 
 * [Apache Kafka Connect](https://docs.confluent.io/current/connect/userguide.html)
-* [IBM Cloud Message Hub with Apache Kafka Connect](https://console.bluemix.net/docs/services/MessageHub/messagehub113.html#kafka_connect)
+* [IBM Event Streams with Apache Kafka Connect](https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-kafka_connect)
 * [`kafka-connect-cloudant`](https://github.com/cloudant-labs/kafka-connect-cloudant)
 * [`kafka-connect-jdbc`](https://github.com/confluentinc/kafka-connect-jdbc)
 * [Confluent JDBC connector documentation](https://docs.confluent.io/current/connect/connect-jdbc/docs/index.html)
-* [Creating a Kafka topic with the Message Hub admin REST API](https://github.com/ibm-messaging/message-hub-docs/tree/master/admin-rest-api#creating-a-kafka-topic)
-* [Connecting to Db2 Warehouse with JDBC](https://www.ibm.com/support/knowledgecenter/SS6NHC/com.ibm.swg.im.dashdb.doc/connecting/connect_connecting_jdbc_applications.html)
+* [Creating a Kafka topic with the Event Streams admin REST API](https://github.com/ibm-messaging/event-streams-docs/tree/master/admin-rest-api#creating-a-kafka-topic)
+* [Connecting to Db2 Warehouse with JDBC](https://www.ibm.com/support/knowledgecenter/SSCJDQ/com.ibm.swg.im.dashdb.doc/connecting/connect_connecting_jdbc_applications.html)
