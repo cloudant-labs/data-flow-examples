@@ -8,7 +8,8 @@ data from IBM Cloudant and write the data elsewhere.
 These examples use Db2 Warehouse on Cloud as a destination.
 
 **N.B. None of these examples are a direct replacement for the deprecated
-Cloudant warehouse integration.**
+Cloudant warehouse integration.
+DB2 Warehouse on Cloud is a paid subscription.**
 
 The examples can be used as a starting point to develop application specific
 data flows, but will need to be modified to meet your application requirements.
@@ -21,8 +22,7 @@ For example care should be taken around handling:
 1. [IBM Cloud Functions](./cloud-functions/README.md)
 1. [Apache Spark on Watson Studio](./spark-on-watson-studio/README.md)
 1. [Node-RED on IBM Cloud](./node-red/README.md)
-1. [IBM Message Hub](ibm-event-streams/README.md)
-1. [IBM Streams Designer (Beta) on Watson Studio](./streams-designer/README.md)
+1. [IBM Event Streams](ibm-event-streams/README.md)
 
 [Learn more](./warehousing-alternatives-compare-table.md) about the differences between these technologies for extracting Cloudant documents
 and writing the data to a Db2 Warehouse on Cloud table.
